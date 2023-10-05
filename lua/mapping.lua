@@ -11,10 +11,18 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- buffer 
-vim.keymap.set('n', '<c-h>', "<cmd>bp<CR>", {silent = true })
-vim.keymap.set('n', '<c-l>', "<cmd>bn<CR>", {silent = true })
+if vim.fn.exists("g:vscode") == 1 then
+  vim.keymap.set('n', '<c-h>', "<cmd>bp<CR>", {silent = true })
+  vim.keymap.set('n', '<c-l>', "<cmd>bn<CR>", {silent = true })
+end
+
+if vim.fn.exists("g:vscode") == 1 then
+  vim.keymap.set('n', '<c-h>', "<cmd>tp<CR>", {silent = true })
+  vim.keymap.set('n', '<c-l>', "<cmd>tn<CR>", {silent = true })
+end
+
 vim.keymap.set('n', '<leader>bc', "<cmd>bdelete<CR>", {silent = true })
-vim.keymap.set('n', '<leader>be', ':edit <c-r>=expand("%:p:h")<CR>/')
+vim.keymap.set('n', '<leader>be', ':edit <c-r>=expand("%:p:h")<CR>\\')
 
 -- sourcing
 vim.keymap.set('n', '<leader>so', ":source %<CR>")

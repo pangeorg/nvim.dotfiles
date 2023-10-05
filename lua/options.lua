@@ -47,7 +47,7 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
-vim.o.shellslash = true
+vim.o.shellslash = false
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`

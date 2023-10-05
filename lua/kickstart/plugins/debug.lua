@@ -1,11 +1,3 @@
--- debug.lua
---
--- Shows how to use the DAP plugin to debug your code.
---
--- Primarily focused on configuring the debugger for Go, but can
--- be extended to other languages as well. That's why it's called
--- kickstart.nvim and not kitchen-sink.nvim ;)
-
 return {
   -- NOTE: Yes, you can install new plugins here!
   'mfussenegger/nvim-dap',
@@ -17,9 +9,6 @@ return {
     -- Installs the debug adapters for you
     'williamboman/mason.nvim',
     'jay-babu/mason-nvim-dap.nvim',
-
-    -- Add your own debuggers here
-    'leoluz/nvim-dap-go',
   },
   config = function()
     local dap = require 'dap'
@@ -36,10 +25,7 @@ return {
 
       -- You'll need to check that you have the required things installed
       -- online, please don't ask me how to install them :)
-      ensure_installed = {
-        -- Update this to ensure that you have the debuggers for the langs you want
-        'delve',
-      },
+      ensure_installed = { },
     }
 
     -- Basic debugging keymaps, feel free to change to your liking!
@@ -81,7 +67,23 @@ return {
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-    -- Install golang specific config
-    require('dap-go').setup()
+
+  dap.adapters.coreclr = {
+    type = 'executable',
+    command = 'C:\\Users\\gstockinger\\AppData\\Local\\nvim-data\\mason\\packages\\netcoredbg\\netcoredbg\\netcoredbg.exe',
+    args = {'--interpreter=vscode'}
+  }
+
+    dap.configurations.cs = {
+      {
+        type = "coreclr",
+        name = "launch - netcoredbg",
+        request = "launch",
+        program = function()
+          return vim.fn.input('Path to dll ', vim.fn.getcwd() .. '\\bin\\Debug\\', 'file')
+        end,
+      },
+}
+
   end,
 }
