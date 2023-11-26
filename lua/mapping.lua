@@ -1,4 +1,6 @@
 
+local osname = vim.loop.os_uname().sysname
+
 -- [[ Basic Keymaps ]]
 vim.g.mapleader = " "
 
@@ -15,7 +17,12 @@ vim.keymap.set('n', '<c-h>', "<cmd>bp<CR>", {silent = true })
 vim.keymap.set('n', '<c-l>', "<cmd>bn<CR>", {silent = true })
 
 vim.keymap.set('n', '<leader>bc', "<cmd>bdelete<CR>", {silent = true })
-vim.keymap.set('n', '<leader>be', ':edit <c-r>=expand("%:p:h")<CR>\\')
+
+if (osname == "Linux") then
+  vim.keymap.set('n', '<leader>be', ':edit <c-r>=expand("%:p:h")<CR>/')
+else
+  vim.keymap.set('n', '<leader>be', ':edit <c-r>=expand("%:p:h")<CR>/')
+end
 
 -- sourcing
 vim.keymap.set('n', '<leader>so', ":source %<CR>")
@@ -56,5 +63,10 @@ vim.keymap.set("i", "<C-c>", "<Esc>")
 
 vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz")
 vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz")
+vim.keymap.set("t", "<C-k>", "<esc><cmd>cnext<CR>zz")
+vim.keymap.set("t", "<C-j>", "<esc><cmd>cprev<CR>zz")
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
+
+-- terminal
+vim.keymap.set("t", "<esc>", "<C-\\><C-n>")

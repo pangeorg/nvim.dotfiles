@@ -45,9 +45,11 @@ vim.o.timeoutlen = 300
 vim.o.completeopt = 'menuone,noselect'
 
 -- NOTE: You should make sure your terminal supports this
+
+vim.o.background = 'dark'
 vim.o.termguicolors = true
 
-vim.o.shellslash = false
+vim.o.shellslash = true
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -68,8 +70,27 @@ end
 
 
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = {'c', 'rust'},
+  pattern = {'c'},
   desc = 'Tabstop = 2 for c and rust',
   command = 'lua SetCStyleTabstops()'
 })
 
+vim.g.terminal_emulator='pwsh'
+vim.opt.shell = 'pwsh.exe'
+vim.o.shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
+vim.o.shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+vim.o.shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
+vim.o.shellquote = ''
+vim.o.shellxquote = ''
+
+-- Some servers have issues with backup files, see #649
+vim.opt.backup = false
+vim.opt.writebackup = false
+
+-- Having longer updatetime (default is 4000 ms = 4s) leads to noticeable
+-- delays and poor user experience
+vim.opt.updatetime = 300
+
+-- Always show the signcolumn, otherwise it would shift the text each time
+-- diagnostics appeared/became resolved
+vim.opt.signcolumn = "yes"
