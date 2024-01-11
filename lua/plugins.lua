@@ -31,7 +31,15 @@ local lazy_default_table = {
         --   vim.cmd.colorscheme 'onedark'
         --   vim.api.nvim_set_hl(0, 'Comment', { italic=false, fg='Grey' })
         -- end,
-        'rose-pine/neovim', name = 'rose-pine' 
+        -- 'rose-pine/neovim', name = 'rose-pine' 
+        --
+        "folke/tokyonight.nvim",
+        lazy = false,
+        priority = 1000,
+        opts = {},
+        config = function()
+            vim.cmd.colorscheme 'tokyonight'
+        end,
     },
 
     {
@@ -41,7 +49,7 @@ local lazy_default_table = {
         opts = {
             options = {
                 icons_enabled = false,
-                theme = 'onedark',
+                theme = 'tokyonight-night',
                 component_separators = '|',
                 section_separators = '',
             },

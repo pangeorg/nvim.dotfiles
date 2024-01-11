@@ -8,6 +8,7 @@
             ],
             "rootPatterns": [
                 "*.csproj",
+                "*.sln",
                 ".vim/",
                 ".git/",
                 ".hg/"
@@ -17,5 +18,6 @@
     "[c][rust][csharp][go][lua][python]": {
         "semanticTokens.enable": true
     },
-    "diagnostic.checkCurrentLine": true
+    "diagnostic.checkCurrentLine": true,
+    "zig.zls.path": "C:\\Users\\gstockinger\\AppData\\Local\\coc\\extensions\\coc-zls-data\\zls_install\\zls.exe"
 }
