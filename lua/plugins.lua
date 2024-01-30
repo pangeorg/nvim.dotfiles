@@ -38,7 +38,7 @@ local lazy_default_table = {
         priority = 1000,
         opts = {},
         config = function()
-            vim.cmd.colorscheme 'tokyonight'
+            vim.cmd.colorscheme 'tokyonight-night'
         end,
     },
 
@@ -49,7 +49,7 @@ local lazy_default_table = {
         opts = {
             options = {
                 icons_enabled = false,
-                theme = 'tokyonight-night',
+                theme = 'tokyonight',
                 component_separators = '|',
                 section_separators = '',
             },
