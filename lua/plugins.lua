@@ -1,5 +1,5 @@
 
--- Install package manager
+--winget install zig.zig Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
@@ -20,6 +20,9 @@ local lazy_default_table = {
     {
         -- Autocompletion
         'hrsh7th/nvim-cmp',
+        dependencies = {
+         'hrsh7th/cmp-nvim-lsp',
+        }
     },
 
     -- Useful plugin to show you pending keybinds.
@@ -56,10 +59,35 @@ local lazy_default_table = {
         },
     },
 
+    --  The configuration is done below. Search for lspconfig to find it below.
+    {
+        -- LSP Configuration & Plugins
+        'neovim/nvim-lspconfig',
+        dependencies = {
+            -- Automatically install LSPs to stdpath for neovim
+            { 'williamboman/mason.nvim', config = true },
+            'williamboman/mason-lspconfig.nvim',
+
+            -- Useful status updates for LSP
+            -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
+            { 'j-hui/fidget.nvim', opts = {} },
+
+            -- Additional lua configuration, makes nvim stuff amazing!
+            'folke/neodev.nvim',
+        },
+    },
+
+    {
+        -- Highlight, edit, and navigate code
+        'nvim-treesitter/nvim-treesitter',
+        dependencies = {
+          'nvim-treesitter/nvim-treesitter-textobjects',
+        },
+        build = ':TSUpdate',
+      },
+
     -- "gc" to comment visual regions/lines
     { 'numToStr/Comment.nvim', opts = {} },
-
-    {'neoclide/coc.nvim'},
 
     {
         'nvim-telescope/telescope.nvim', 
