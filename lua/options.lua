@@ -1,4 +1,3 @@
-
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -49,35 +48,48 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.background = 'dark'
 vim.o.termguicolors = true
 
-vim.o.shellslash = true
+-- vim.o.shellslash = true
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
 vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank()
-  end,
-  group = highlight_group,
-  pattern = '*',
+    callback = function()
+        vim.highlight.on_yank()
+    end,
+    group = highlight_group,
+    pattern = '*',
 })
 
 function SetCStyleTabstops()
-  vim.opt.tabstop = 2
-  vim.opt.softtabstop = 2
-  vim.opt.shiftwidth = 2
+    vim.opt.tabstop = 2
+    vim.opt.softtabstop = 2
+    vim.opt.shiftwidth = 2
 end
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'c' },
+    desc = 'Tabstop = 2 for c and rust',
+    command = 'lua SetCStyleTabstops()'
+})
+
+vim.api.nvim_create_autocmd('FileType', {
+    pattern = { 'jinja2' },
+    desc = 'Jinja2 templates are html',
+    command = 'set ft=html'
+})
 
 
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = {'c'},
-  desc = 'Tabstop = 2 for c and rust',
-  command = 'lua SetCStyleTabstops()'
+    pattern = { 'fsx', 'fs' },
+    desc = 'Autohover',
+    command = 'CursorHold *.fs,*.fsi,*.fsx call fsharp#showTooltip()'
 })
 
-vim.g.terminal_emulator='pwsh'
+vim.g.terminal_emulator = 'pwsh'
 vim.opt.shell = 'pwsh.exe'
-vim.o.shellcmdflag = '-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
+vim.o.shellcmdflag =
+'-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;'
 vim.o.shellredir = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
 vim.o.shellpipe = '2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode'
 vim.o.shellquote = ''
@@ -94,3 +106,8 @@ vim.opt.updatetime = 300
 -- Always show the signcolumn, otherwise it would shift the text each time
 -- diagnostics appeared/became resolved
 vim.opt.signcolumn = "yes"
+
+--
+vim.cmd([[ let g:fsharp#lsp_auto_setup = 0 ]])
+
+-- 

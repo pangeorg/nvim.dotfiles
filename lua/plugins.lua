@@ -1,4 +1,3 @@
-
 --winget install zig.zig Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
@@ -21,12 +20,21 @@ local lazy_default_table = {
         -- Autocompletion
         'hrsh7th/nvim-cmp',
         dependencies = {
-         'hrsh7th/cmp-nvim-lsp',
-        }
+            'hrsh7th/cmp-nvim-lsp',
+            -- Snippet Engine & its associated nvim-cmp source
+            'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip',
+            -- Adds LSP completion capabilities
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-path',
+
+            -- Adds a number of user-friendly snippets
+            'rafamadriz/friendly-snippets',
+        },
     },
 
     -- Useful plugin to show you pending keybinds.
-    { 'folke/which-key.nvim', opts = {} },
+    { 'folke/which-key.nvim',  opts = {} },
     {
         -- Theme inspired by Atom
         -- 'navarasu/onedark.nvim',
@@ -34,7 +42,7 @@ local lazy_default_table = {
         --   vim.cmd.colorscheme 'onedark'
         --   vim.api.nvim_set_hl(0, 'Comment', { italic=false, fg='Grey' })
         -- end,
-        -- 'rose-pine/neovim', name = 'rose-pine' 
+        -- 'rose-pine/neovim', name = 'rose-pine'
         --
         "folke/tokyonight.nvim",
         lazy = false,
@@ -42,6 +50,7 @@ local lazy_default_table = {
         opts = {},
         config = function()
             vim.cmd.colorscheme 'tokyonight-night'
+            vim.cmd('hi Normal guibg=None')
         end,
     },
 
@@ -70,7 +79,7 @@ local lazy_default_table = {
 
             -- Useful status updates for LSP
             -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
-            { 'j-hui/fidget.nvim', opts = {} },
+            { 'j-hui/fidget.nvim',       opts = {} },
 
             -- Additional lua configuration, makes nvim stuff amazing!
             'folke/neodev.nvim',
@@ -81,18 +90,20 @@ local lazy_default_table = {
         -- Highlight, edit, and navigate code
         'nvim-treesitter/nvim-treesitter',
         dependencies = {
-          'nvim-treesitter/nvim-treesitter-textobjects',
+            'nvim-treesitter/nvim-treesitter-textobjects',
         },
         build = ':TSUpdate',
-      },
+    },
 
     -- "gc" to comment visual regions/lines
     { 'numToStr/Comment.nvim', opts = {} },
 
     {
-        'nvim-telescope/telescope.nvim', 
+        'nvim-telescope/telescope.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
+    -- "f#"
+    { 'ionide/Ionide-vim' },
 
 }
 

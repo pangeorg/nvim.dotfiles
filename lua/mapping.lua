@@ -22,7 +22,7 @@ keyset('n', '<leader>bc', "<cmd>bdelete<CR>", {silent = true })
 if (osname == "Linux") then
   keyset('n', '<leader>be', ':edit <c-r>=expand("%:p:h")<CR>/')
 else
-  keyset('n', '<leader>be', ':edit <c-r>=expand("%:p:h")<CR>/')
+  keyset('n', '<leader>be', ':edit <c-r>=expand("%:p:h")<CR>\\')
 end
 
 keyset('n', '<leader>bh', ':edit ~/')
